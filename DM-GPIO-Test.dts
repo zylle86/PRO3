@@ -1,0 +1,105 @@
+/*  
+* Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Purpose License Version 2 as
+* published by the Free Software Foundation
+*
+* Original from: github.com/jadonk/validation-scripts/blob/master/test-capemgr/ 
+*
+* Modified by Derek Molloy for the example on www.derekmolloy.ie
+* that maps GPIO pins for the example
+*/
+
+/dts-v1/;
+/plugin/;
+
+/{
+       compatible = "ti,beaglebone", "ti,beaglebone-black";
+       part-number = "DM-GPIO-Test";
+       version = "00A0";
+
+       fragment@0 {
+             target = <&am33xx_pinmux>;
+            
+             __overlay__ {
+                  pinctrl_test: DM_GPIO_Test_Pins {
+			pinctrl-single,pins = <
+
+            
+				0x090 0x2f  /* P8_07 36 INPUT  MODE7 none - Input */
+				0x094 0x2f  /* P8_08 37 INPUT  MODE7 none - Input */
+				0x09c 0x2f  /* P8_09 39 INPUT  MODE7 none - Input */
+				0x098 0x2f  /* P8_10 38 INPUT  MODE7 none - Input */
+                
+				0x070 0x2f  /* P9_11 28 INPUT  MODE7 none - Input */
+				0x078 0x2f  /* P9_12 30 INPUT  MODE7 none - Input */
+				0x074 0x2f  /* P9_13 29 INPUT  MODE7 none - Input */
+				0x048 0x2f  /* P9_14 18 INPUT  MODE7 none - Input */
+				0x040 0x2f  /* P9_15 16 INPUT  MODE7 none - Input */
+				0x04c 0x2f  /* P9_16 19 INPUT  MODE7 none - Input */
+				0x15c 0x2f  /* P9_17 87 INPUT  MODE7 none - Input */
+				0x158 0x2f  /* P9_18 86 INPUT  MODE7 none - Input */
+
+
+                0x034 0x07  /* P8_11 13 OUTPUT  MODE7 pulldown - Plant 1, Water */
+				0x030 0x07  /* P8_12 12 OUTPUT  MODE7 pulldown - Plant 1, Temp */
+				0x024 0x07  /* P8_13 09 OUTPUT  MODE7 pulldown - Plant 1, Light */
+
+				0x028 0x07  /* P8_14 10 OUTPUT  MODE7 pulldown - Plant 2, Water */
+				0x03c 0x07  /* P8_15 15 OUTPUT  MODE7 pulldown - Plant 2, Temp */
+				0x038 0x07  /* P8_16 14 OUTPUT  MODE7 pulldown - Plant 2, Light */
+
+				0x02c 0x07  /* P8_17 11 OUTPUT  MODE7 pulldown - Plant 3, Water */
+				0x08c 0x07  /* P8_18 35 OUTPUT  MODE7 pulldown - Plant 3, Temp */
+				0x020 0x07  /* P8_19 08 OUTPUT  MODE7 pulldown - Plant 3, Light */
+
+				0x07c 0x07  /* P8_26 31 OUTPUT  MODE7 pulldown - Plant 4, Water */
+				0x0e0 0x07  /* P8_27 56 OUTPUT  MODE7 pulldown - Plant 4, Temp */
+				0x0e8 0x07  /* P8_28 58 OUTPUT  MODE7 pulldown - Plant 4, Light */
+
+				0x0e4 0x07  /* P8_29 57 OUTPUT  MODE7 pulldown - Plant 5, Water */
+				0x0ec 0x07  /* P8_30 59 OUTPUT  MODE7 pulldown - Plant 5, Temp */
+				0x0d8 0x07  /* P8_31 54 OUTPUT  MODE7 pulldown - Plant 5, Light */
+
+				0x0dc 0x07  /* P8_32 55 OUTPUT  MODE7 pulldown - Plant 6, Water */
+				0x0d4 0x07  /* P8_33 53 OUTPUT  MODE7 pulldown - Plant 6, Temp */
+				0x0cc 0x07  /* P8_34 51 OUTPUT  MODE7 pulldown - Plant 6, Light */
+
+				0x0d0 0x07  /* P8_35 52 OUTPUT  MODE7 pulldown - Plant 7, Water */
+				0x0c8 0x07  /* P8_36 50 OUTPUT  MODE7 pulldown - Plant 7, Temp */
+				0x0c0 0x07  /* P8_37 48 OUTPUT  MODE7 pulldown - Plant 7, Light */
+
+				0x0c4 0x07  /* P8_38 49 OUTPUT  MODE7 pulldown - Plant 8, Water */
+				0x0b8 0x07  /* P8_39 46 OUTPUT  MODE7 pulldown - Plant 8, Temp */
+				0x0bc 0x07  /* P8_40 47 OUTPUT  MODE7 pulldown - Plant 8, Light */
+
+				0x0b0 0x07  /* P8_41 44 OUTPUT  MODE7 pulldown - Plant 9, Water */ 
+				0x0b4 0x07  /* P8_42 45 OUTPUT  MODE7 pulldown - Plant 9, Temp */
+				0x0a8 0x07  /* P8_43 42 OUTPUT  MODE7 pulldown - Plant 9, Light */
+
+				0x0ac 0x07  /* P8_44 43 OUTPUT  MODE7 pulldown - Plant 10, Water */
+				0x0a0 0x07  /* P8_45 40 OUTPUT  MODE7 pulldown - Plant 10, Temp */
+				0x0a4 0x07  /* P8_46 41 OUTPUT  MODE7 pulldown - Plant 10, Light */
+				
+
+                /* OUTPUT  GPIO(mode7) 0x07 pulldown, 0x17 pullup, 0x?f no pullup/down */
+			    /* INPUT   GPIO(mode7) 0x27 pulldown, 0x37 pullup, 0x?f no pullup/down */
+
+			>;
+		  };
+             };
+       };
+
+       fragment@1 {
+		target = <&ocp>;
+		__overlay__ {
+			test_helper: helper {
+				compatible = "bone-pinmux-helper";
+				pinctrl-names = "default";
+				pinctrl-0 = <&pinctrl_test>;
+				status = "okay";
+			};
+		};
+	};
+};
